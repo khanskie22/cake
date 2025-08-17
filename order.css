@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@100;200;300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+iframe{
+    width:850px;
+    height:480px;
+   
+}
+.container{
+    width: 100%;
+    max-width: 100vw;
+    margin: 0;
+    text-align: center;
+    transition: transform .5s;
+
+}
+
+
+/*header css*/
+
+header{
+    display: flex;
+    align-items: center;
+   
+    height: 70px;
+    background-color: rgb(248, 126, 223);
+    padding: 10px 30px 0 30px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    
+
+}*/
+
+.main-home{
+    width: 100%;
+    height: 100vh;
+    
+    background-size: cover;
+    background-position: center;
+    display: absolute;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+.main-text h5{
+    margin: 10px;
+    font-size: 16px;
+    color: rgb(58, 55, 55);
+    text-transform: capitalize;
+    font-weight: 500;
+}
+
+.main-text h1{
+    margin: 6px;
+    font-weight: 600;
+    font-size: 65px;
+    line-height: 1.1;
+    text-transform: capitalize;
+    color: black;
+}
+.main-text p{
+    color: rgb(58, 55, 55);
+    font-size: 20px;
+    font-style: italic;
+    margin-bottom: 20px;
+}
+.main-text{
+    padding: 70px 0 0 0 ;
+}
+
+
+
+/* products css*/
+
+.cake{
+    padding-top: 1px;
+    padding-left: 25px;
+    font-weight: 400px; 
+    text-align: left;
+}
+.listProduct .item img{
+    max-width: 150px;
+    max-height: 160px;
+    filter: drop-shadow(0 40px 20px #0009);
+}
+.listProduct{
+    padding: 0 25px 0 25px;
+    margin-top: 25px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+}
+.listProduct .item{
+    border: 1.5px solid #9f1598;
+    padding: 20px;
+    border-radius: 20px;
+}
+.listProduct .item h2{
+    font-weight: 500;
+    font-size: 15px;
+}
+.listProduct .item .price{
+    letter-spacing: 7px;
+    font-size: small;
+}
+.listProduct .item button{
+    background-color: rgb(237, 93, 227);
+    color: #eee;
+    padding: 5px 10px;
+    border-radius: 20px;
+    margin-top: 10spx;
+    border: none;
+    cursor: pointer;
+    height: 35px;
+    font-weight: 500;
+}
+@media screen and (max-width: 992px){
+    .listProduct{
+        grid-template-columns: repeat(3, 1fr);
+    }iframe{
+        width: 650px;
+        height:350px;
+       
+    }
+}
+@media screen and (max-width: 798px){
+    .listProduct{
+        grid-template-columns: repeat(2, 1fr);
+    }
+    iframe{
+        width: 425px;
+        height:240px;
+       
+    }
+}
+
+/* CONTACT-SECTION */
+
+.contact{
+    background-color: #f3f4f6;
+    margin-top: 50px;
+    padding: 20px;
+  }
+  .contact-info{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px,auto));
+    gap: 3rem;
+  
+  }
+  .contact-info p{
+    color: #312e2e;
+    font-size: 15px;
+    font-weight: 400;
+    text-transform: lowercase;
+
+    margin-bottom: 10px;
+    cursor: pointer;
+  
+  
+  }
+  .contact-info p a{
+    color: #312e2e;
+    font-size: 16px;
+    font-weight: 400;
+    text-transform: capitalize;
+    margin-bottom: 10px;
+    cursor: pointer;
+ }
+  .end-text{
+    background-color: #edfff1;
+    text-align: center;
+    padding: 20px;
+  }
+  .end-text p{
+    color: black;
+    text-transform: capitalize;
+}
+a{
+    color: white;
+    text-decoration: none;
+}
