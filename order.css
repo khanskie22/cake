@@ -89,45 +89,65 @@ header{
 .cake{
     padding-top: 1px;
     padding-left: 25px;
-    font-weight: 400px; 
+    font-weight: 50px; 
     text-align: left;
 }
 .listProduct .item img{
     max-width: 150px;
     max-height: 160px;
-    filter: drop-shadow(0 40px 20px #0009);
+    filter: drop-shadow(0 10px 10px #0009);
 }
-.listProduct{
-    padding: 0 25px 0 25px;
-    margin-top: 25px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
-}
-.listProduct .item{
-    border: 1.5px solid #9f1598;
+.listProduct {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
     padding: 20px;
-    border-radius: 20px;
 }
-.listProduct .item h2{
-    font-weight: 500;
-    font-size: 15px;
+
+.item {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 15px;
+    width: 250px;
+    text-align: center;
+    box-shadow: 0 1px 2px rgba(121, 121, 121, 0.1);
+    transition: transform 0.3s ease;
 }
-.listProduct .item .price{
-    letter-spacing: 7px;
-    font-size: small;
+
+.item:hover {
+    transform: scale(1.05);
 }
-.listProduct .item button{
-    background-color: rgb(237, 93, 227);
-    color: #eee;
-    padding: 5px 10px;
-    border-radius: 20px;
-    margin-top: 10spx;
+
+.item img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.price {
+    font-weight: bold;
+    color: #e91e63;
+    margin: 10px 0;
+}
+
+button.addCart {
+    background-color: #ff4081;
     border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    color: white;
     cursor: pointer;
-    height: 35px;
-    font-weight: 500;
+    font-weight: bold;
 }
+
+button.addCart a {
+    text-decoration: none;
+    color: white;
+}
+
 @media screen and (max-width: 992px){
     .listProduct{
         grid-template-columns: repeat(3, 1fr);

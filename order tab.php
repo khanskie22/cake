@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +11,9 @@
     <link rel="stylesheet" type="text/css" href="order.css">
 
 </head>
+
 <body> 
+    
     <header id="header">
 
        
@@ -40,122 +43,38 @@
         </section>
 
         <!--item section-->
-
+ 
         <div>
             <h2 class="cake">MENU</h2>
-        <div class="listProduct">
-            <div class="item">
-                <div><img src="1.JPG" alt=""  style="border-radius: 12px;"></div>
-                <div><h2>1 LAYER CAKE</h2></div>
-                <div class="price">₱ 1,000</div>
-                <p>Available Stock: <span id="stock" class="stock">34</span></p>
-                <button class="addCart"><a href="invoice.html">Buy now</a>
-                    
-                </button>
-            </div>
-            <div class="item">
-                <div><img src="2.JPG" alt=""   style="border-radius: 12px;"></div>
-                <div><h2>2 LAYER CAKE</h2></div>
-                <div class="price">₱ 1,500</div>
-                <p>Available Stock: <span id="stock" class="stock">23</span></p>
-                <button class="addCart">
-                    Buy now
-                </button>
-            </div>
-            <div class="item">
-                <div><img src="3.JPG" alt=""   style="border-radius: 12px;"></div>
-                <div><h2>3 LAYER CAKE</h2></div>
-                <div class="price">₱ 2,000</div>
-                <p>Available Stock: <span id="stock" class="stock">41</span></p>
-                <button class="addCart">
-                    Buy now
-                </button>
-            </div>
-            <div class="item">
-                <div><img src="4.JPG" alt=""   style="border-radius: 12px;"></div>
-                <div><h2>CAKE W/CUPCAKE</h2></div>
-                <div class="price">₱ 1,500</div>
-                <p>Available Stock: <span id="stock" class="stock">13</span></p>
-                <button class="addCart">
-                    Buy now
-                </button>
-            </div>
-            <div class="item">
-                <div><img src="5.jpg" alt=""   style="border-radius: 12px;"></div>
-                <div><h2>CHOCOLATE MOIST CAKE</h2></div>
-                <div class="price">₱ 300</div>
-                <p>Available Stock: <span id="stock" class="stock">32</span></p>
-                <button class="addCart">
-                    Buy now
-                </button>
-            </div>
-            <div class="item">
-                <div><img src="6.jpg" alt=""   style="border-radius: 12px;"></div>
-                <div><h2>MANGUTANA PAKONG MAMA UNSA NI</h2></div>
-                <div class="price">₱ 800</div>
-                <p>Available Stock: <span id="stock" class="stock">25</span></p>
-                <button class="addCart">
-                    Buy now
-                </button>
-            </div>
-            <div class="item">
-                <div><img src="7.jpg" alt=""   style="border-radius: 12px;"></div>
-                <div><h2>MANGO TAPIOCA</h2></div>
-                <div class="price">₱ 100</div>
-                <p>Available Stock: <span id="stock" class="stock">32</span></p>
-                <button class="addCart">
-                    Buy now
-                </button>
-            </div>
-            <div class="item">
-                <div><img src="8.jpg" alt=""   style="border-radius: 12px;"></div>
-                <div><h2>HEART CHOCOLATE MOIST CAKE</h2></div>
-                <div class="price">₱ 250</div>
-                <p>Available Stock: <span id="stock" class="stock">12</span></p>
-                <button class="addCart">
-                    Buy now
-                </button>
-            </div>
-            <div class="item">
-                <div><img src="9.jpg" alt=""   style="border-radius: 12px;"></div>
-                <div><h2>PACKAGE</h2></div>
-                <div class="price">₱ 3500</div>
-                <p><span id="stock" class="stock"> </span></p>
-                <button class="addCart">
-                    Buy now
-                </button>
-            </div>
-            <div class="item">
-                <div><img src="10.jpg" alt=""   style="border-radius: 12px;"></div>
-                <div><h2>MACAROONS</h2></div>
-                <div class="price">₱ 1,000</div>
-                <p>Available Stock: <span id="stock" class="stock">42</span></p>
-                <button class="addCart">
-                    Buy now
-                </button>
-            </div>
-            <div class="item">
-                <div><img src="11.jpg" alt=""   style="border-radius: 12px;"></div>
-                <div><h2>COSTUMIZED NUMBER CAKE</h2></div>
-                <div class="price">₱ 1,000</div>
-                <p>Available Stock: <span id="stock" class="stock">24</span></p>
-                <button class="addCart">
-                    Buy now
-                </button>
-            </div>
-            <div class="item">
-                <div><img src="12.jpg" alt=""   style="border-radius: 12px;"></div>
-                <div><h2>ASSORTED BITESIZE</h2></div>
-                <div class="price">₱ 1,000</div>
-                <p>Available Stock: <span id="stock" class="stock">23</span></p>
-                <button class="addCart">
-                    Buy now
-                </button>
-            </div>
-        </div>
-        </div>      
-    </div>
+            <div class="listProduct">
+            <?php
+                require './backend/products.php';
 
+                $stmt = $conn->prepare("SELECT * FROM products LIMIT 12"); // limit 12 items
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                if ($result->num_rows > 0):
+                ?>
+                    <div class="listProduct">
+                        <?php while ($row = $result->fetch_assoc()): ?>
+                            <div class="item">
+                                <div><img src="<?php echo htmlspecialchars($row['image']); ?>" alt="" style="border-radius: 12px;"></div>
+                                <div><h3><?php echo htmlspecialchars($row['name']); ?></h3></div>
+                                <div class="price"><?php echo htmlspecialchars($row['price']); ?></div>
+                                <p>Available Stock: 
+                                    <span id="stock" class="stock"><?php echo htmlspecialchars($row['quantity']); ?></span>
+                                </p>
+                                <button class="addCart"><a href="invoice.html">Buy now</a></button>
+                            </div>
+                        <?php endwhile; ?>
+                    </div>
+                <?php
+                else:
+                    echo "<p>No products found.</p>";
+                endif;
+                ?>
+            </div>
     
 
      <!--contact section-->
