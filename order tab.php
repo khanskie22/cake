@@ -14,39 +14,45 @@
 
 <body> 
     
-    <header id="header">
+   <header id="header">
+    <a href="">Home</a>
+    <a href="">About</a>
+    <a href="">FB</a>
+</header>
 
-       
-        <a id="a" href="para sa future.html" class="previous">&laquo; Go Back</a>
-        <a href=""></a>
-        <a href=""></a>
-        <a href=""></a>
-   
-    </header>
+    
 
     <div class="container">
 
-        
         <section class="main-home">
-            
-        <div class="main-text">
-            <h5>_______________________________________________</h5>
-            <h1>SWEETNESS<br>OVERLOAD</h1>
-            <p>DELIGHT IN <b>EVERY</b> BITE!</p>
-            <h5>_______________________________________________</h5>
-            <div>
-                <iframe  src="https://www.youtube.com/embed/HTXB6flODww?autoplay=1"></iframe>
-             </div>
-  
-            
-       
-        </section>
+  <div class="main-text">
+    <h5>_______________________________________________</h5>
+    <h1>SWEETNESS<br>OVERLOAD</h1>
+    <p>DELIGHT IN <b>EVERY</b> BITE!</p>
+    <h5>_______________________________________________</h5>
+    
+    <div class="video-wrapper">
+      <iframe width="560" height="230" src="https://www.youtube.com/embed/HTXB6flODww?autoplay=1" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
 
         <!--item section-->
  
         <div>
             <h2 class="cake">MENU</h2>
             <div class="listProduct">
+              <!-- Modal Structure -->
+                      <div id="orderModal" class="modal">
+                        <div class="modal-content">
+                          <span class="close">&times;</span>
+                          <h2 id="modalProductName">Order Item</h2>
+                          <label for="quantityInput">Enter quantity:</label>
+                          <input type="number" id="quantityInput" min="1" value="1">
+                        <button id="confirmOrderBtn">Confirm Order</button>
+                        </div>
+                      </div>
             <?php
                 require './backend/products.php';
 
@@ -65,7 +71,9 @@
                                 <p>Available Stock: 
                                     <span id="stock" class="stock"><?php echo htmlspecialchars($row['quantity']); ?></span>
                                 </p>
-                                <button class="addCart"><a href="invoice.html">Buy now</a></button>
+                                <button class="addCart" <?php if ($row['quantity'] <= 0) echo 'disabled'; ?>>Buy now</button>
+                                
+
                             </div>
                         <?php endwhile; ?>
                     </div>
@@ -126,4 +134,78 @@
 
     
 </body>
+<script>
+  
+                
+    document.addEventListener("DOMContentLoaded", function () {
+        const modal = document.getElementById("orderModal");
+        const closeModal = document.querySelector(".close");
+        const confirmOrderBtn = document.getElementById("confirmOrderBtn");
+        const quantityInput = document.getElementById("quantityInput");
+        const modalProductName = document.getElementById("modalProductName");
+
+        let selectedProductName = "";
+
+        // Open modal when Buy Now is clicked
+        document.querySelectorAll('.addCart').forEach(button => {
+            button.addEventListener('click', function (e) {
+                e.preventDefault();
+                const product = this.parentElement.querySelector('h3').innerText;
+                selectedProductName = product;
+                modalProductName.innerText = `Order: ${product}`;
+                quantityInput.value = 1;
+                quantityInput.name = 'quantity';
+                modal.style.display = "block";
+            });
+        });
+
+        // Close modal
+        closeModal.onclick = () => {
+            modal.style.display = "none";
+        }
+
+        // When user clicks outside the modal
+        window.onclick = (event) => {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+    confirmOrderBtn.onclick = () => {
+    const quantity = parseInt(quantityInput.value);
+
+    if (isNaN(quantity) || quantity <= 0) {
+        alert("Please enter a valid quantity.");
+    } else {
+        // Send to backend via fetch
+        
+
+        fetch('./backend/ordersback.php', {
+          
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `name=${encodeURIComponent(selectedProductName)}&quantity=${quantity}`
+
+        })
+        .then(response => response.text())
+              .then(data => {
+          if (data.trim() === "redirect") {
+              window.location.href = './receipt.php';
+          } else {
+              alert(data);
+          }
+      })
+
+        .catch(error => {
+            console.error("Error:", error);
+            alert("Something went wrong.");
+        });
+    }
+}
+
+    });
+</script>
+
 </html>
